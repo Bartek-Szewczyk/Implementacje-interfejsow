@@ -4,7 +4,7 @@ using System;
 using System.IO;
 
 
-namespace zadanie2UnitTests
+namespace zadanie1UnitTests
 {
 
     public class ConsoleRedirectionToStringWriter : IDisposable
@@ -284,5 +284,4 @@ namespace zadanie2UnitTests
         }
 
     }
-    
 }
