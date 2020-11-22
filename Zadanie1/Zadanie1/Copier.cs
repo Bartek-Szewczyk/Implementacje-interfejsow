@@ -12,8 +12,8 @@ namespace Zadanie1
             return new Copier();
         }
 
-        public int PrintCounter { get; set; }
-        public int ScanCounter { get; set; }
+        public int PrintCounter { get; private set; } = 0;
+        public int ScanCounter { get; private set; } = 0;
 
 
         public void Print(in IDocument doc1)
@@ -31,19 +31,31 @@ namespace Zadanie1
             doc1 = null;
             if (state == IDevice.State.@on)
             {
+                switch (formatType)
+                {
+                    case IDocument.FormatType.PDF:
+                        doc1 = new PDFDocument("PDFScan" + ScanCounter + ".pdf");
+                        break;
+                    case IDocument.FormatType.JPG:
+                        doc1 = new ImageDocument("ImageScan" + ScanCounter + ".jpg");
+                        break;
+                    case IDocument.FormatType.TXT:
+                        doc1 = new ImageDocument("TextScan" + ScanCounter + ".txt");
+                        break;
 
-                Console.WriteLine(DateTime.Now + " Scan: " + formatType + ScanCounter);
+                }
+
+                Console.WriteLine(DateTime.Now + " Scan: " + doc1.GetFileName());
                 ScanCounter++;
             }
+
 
         }
 
         public void ScanAndPrint()
         {
-
             Scan(out IDocument doc1);
             Print(in doc1);
-
 
         }
 
@@ -54,9 +66,11 @@ namespace Zadanie1
             doc1 = null;
             if (state == IDevice.State.@on)
             {
-                Console.WriteLine(DateTime.Now + " Scan: " + +ScanCounter);
+                doc1 = new PDFDocument("PDFScan" + ScanCounter + ".pdf");
+                Console.WriteLine(DateTime.Now + " Scan: " + doc1.GetFileName());
                 ScanCounter++;
             }
+
 
         }
     }
