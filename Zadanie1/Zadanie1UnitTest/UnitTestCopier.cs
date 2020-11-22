@@ -1,5 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Zadanie1;
+
 using System;
 using System.IO;
 
@@ -37,7 +38,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_GetState_StateOff()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOff();
 
             Assert.AreEqual(IDevice.State.off, copier.GetState()); 
@@ -46,7 +47,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_GetState_StateOn()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
 
             Assert.AreEqual(IDevice.State.on, copier.GetState());
@@ -58,7 +59,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_Print_DeviceOn()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -77,7 +78,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_Print_DeviceOff()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -96,7 +97,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_Scan_DeviceOff()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -115,7 +116,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_Scan_DeviceOn()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -134,7 +135,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_Scan_FormatTypeDocument()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -164,7 +165,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_ScanAndPrint_DeviceOn()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
 
             var currentConsoleOut = Console.Out;
@@ -184,7 +185,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_ScanAndPrint_DeviceOff()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOff();
 
             var currentConsoleOut = Console.Out;
@@ -201,7 +202,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_PrintCounter()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
 
             IDocument doc1 = new PDFDocument("aaa.pdf");
@@ -226,7 +227,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_ScanCounter()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
 
             IDocument doc1;
@@ -252,7 +253,7 @@ namespace zadanie1UnitTests
         [TestMethod]
         public void Copier_PowerOnCounter()
         {
-            var copier = new Copier();
+            var copier = Copier.CreateInstance();
             copier.PowerOn();
             copier.PowerOn();
             copier.PowerOn();

@@ -4,45 +4,60 @@ using System.Text;
 
 namespace Zadanie1
 {
-    public class Copier : IDevice
+    public class Copier : BaseDevice, IPrinter, IScanner
     {
-        public void PowerOn()
+
+        public static Copier CreateInstance()
         {
-            throw new NotImplementedException();
+            return new Copier();
         }
 
-        public void PowerOff()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IDevice.State GetState()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Counter { get; }
         public int PrintCounter { get; set; }
         public int ScanCounter { get; set; }
 
+
         public void Print(in IDocument doc1)
         {
-            throw new NotImplementedException();
-        }
+            if (state == IDevice.State.@on)
+            {
+                Console.WriteLine(DateTime.Now + " Print: " + doc1.GetFileName());
+                PrintCounter++;
+            }
 
-        public void Scan(out IDocument doc1)
-        {
-            throw new NotImplementedException();
         }
 
         public void Scan(out IDocument doc1, IDocument.FormatType formatType)
         {
-            throw new NotImplementedException();
+            doc1 = null;
+            if (state == IDevice.State.@on)
+            {
+
+                Console.WriteLine(DateTime.Now + " Scan: " + formatType + ScanCounter);
+                ScanCounter++;
+            }
+
         }
 
         public void ScanAndPrint()
         {
-            throw new NotImplementedException();
+
+            Scan(out IDocument doc1);
+            Print(in doc1);
+
+
+        }
+
+
+
+        public void Scan(out IDocument doc1)
+        {
+            doc1 = null;
+            if (state == IDevice.State.@on)
+            {
+                Console.WriteLine(DateTime.Now + " Scan: " + +ScanCounter);
+                ScanCounter++;
+            }
+
         }
     }
 }
