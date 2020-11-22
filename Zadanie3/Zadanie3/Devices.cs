@@ -61,5 +61,9 @@ namespace Zadanie3
         /// <param name="document">obiekt typu IDocument, różny od `null`</param>
         void Scan(out IDocument document, IDocument.FormatType formatType);
     }
+    public interface IFax : IDevice
+    {
+        void Fax(in IDocument document);
+    }
 
 }
