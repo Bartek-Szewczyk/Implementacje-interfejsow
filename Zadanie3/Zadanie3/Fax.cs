@@ -4,25 +4,28 @@ using System.Text;
 
 namespace Zadanie3
 {
-    class Fax :IFax
+    class Fax : IFax
     {
+        public static Fax CreateInstance()
+        {
+            return new Fax();
+        }
+
+        protected IDevice.State state = IDevice.State.off;
+        public IDevice.State GetState() => state;
+
         public void PowerOn()
         {
-            throw new NotImplementedException();
+            state = IDevice.State.@on;
         }
 
         public void PowerOff()
         {
-            throw new NotImplementedException();
+            state = IDevice.State.@off;
         }
-
-        public IDevice.State GetState()
-        {
-            throw new NotImplementedException();
-        }
-
-        public int Counter { get; }
-        public void Fax(in IDocument document)
+        
+        public int Counter { get; set; } = 0;
+        public void FaxSend(in IDocument document)
         {
             throw new NotImplementedException();
         }
