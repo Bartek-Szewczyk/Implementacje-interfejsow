@@ -1,17 +1,17 @@
 using System;
 
-namespace Zadanie1
+namespace Zadanie2
 {
     public interface IDevice
     {
-        enum State {on, off};
+        enum State { on, off };
 
         void PowerOn(); // uruchamia urządzenie, zmienia stan na `on`
         void PowerOff(); // wyłącza urządzenie, zmienia stan na `off
-        State GetState() ; // zwraca aktualny stan urządzenia
+        State GetState(); // zwraca aktualny stan urządzenia
 
-        int Counter {get;}  // zwraca liczbę charakteryzującą eksploatację urządzenia,
-                            // np. liczbę uruchomień, liczbę wydrukow, liczbę skanów, ...
+        int Counter { get; }  // zwraca liczbę charakteryzującą eksploatację urządzenia,
+                              // np. liczbę uruchomień, liczbę wydrukow, liczbę skanów, ...
     }
 
     public abstract class BaseDevice : IDevice
@@ -21,14 +21,24 @@ namespace Zadanie1
 
         public void PowerOff()
         {
-            state = IDevice.State.off;
+            if (state == IDevice.State.@on)
+            {
+                 state = IDevice.State.off;
             Console.WriteLine("... Device is off !");
+
+            }
+           
         }
 
         public void PowerOn()
         {
-            state = IDevice.State.on;
-            Console.WriteLine("Device is on ...");  
+            if (state == IDevice.State.@off)
+            {
+                state = IDevice.State.on;
+                Console.WriteLine("Device is on ...");
+                Counter++;
+            }
+
         }
 
         public int Counter { get; private set; } = 0;
@@ -40,6 +50,7 @@ namespace Zadanie1
         /// Dokument jest drukowany, jeśli urządzenie włączone. W przeciwnym przypadku nic się nie wykonuje
         /// </summary>
         /// <param name="document">obiekt typu IDocument, różny od `null`</param>
+
         void Print(in IDocument document);
     }
 
@@ -47,6 +58,7 @@ namespace Zadanie1
     {
         // dokument jest skanowany, jeśli urządzenie włączone
         // w przeciwnym przypadku nic się dzieje
+        /// <param name="document">obiekt typu IDocument, różny od `null`</param>
         void Scan(out IDocument document, IDocument.FormatType formatType);
     }
 
