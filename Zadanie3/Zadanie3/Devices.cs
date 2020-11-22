@@ -63,7 +63,7 @@ namespace Zadanie3
     }
     public interface IFax : IDevice
     {
-        void Fax(in IDocument document);
+        void FaxSend(in IDocument document);
     }
 
 }

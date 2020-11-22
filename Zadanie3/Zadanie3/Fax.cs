@@ -25,6 +25,7 @@ namespace Zadanie3
         }
         
         public int Counter { get; set; } = 0;
+       
         public void FaxSend(in IDocument document)
         {
             throw new NotImplementedException();
