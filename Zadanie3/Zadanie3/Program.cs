@@ -8,7 +8,7 @@ namespace Zadanie3
     {
         static void Main(string[] args)
         {
-            var xerox = Copier.CreateInstance();
+            var xerox = MultidimensionalDevice.CreateInstance();
             xerox.PowerOn();
 
             IDocument doc1 = new PDFDocument("aaa.pdf");
@@ -16,7 +16,7 @@ namespace Zadanie3
 
             IDocument doc2;
             xerox.Scan(out doc2);
-            xerox.ScanAndPrint();
+            xerox.FaxSend(doc2);
             Console.WriteLine(xerox.Counter);
             Console.WriteLine(xerox.PrintCounter);
             Console.WriteLine(xerox.ScanCounter);

@@ -26,9 +26,9 @@ namespace Zadanie3
         
         public int Counter { get; set; } = 0;
        
-        public void FaxSend(in IDocument document)
+        public void FaxSend(in IDocument doc1)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(DateTime.Now + " Send Fax: " + doc1.GetFileName());
         }
     }
 }

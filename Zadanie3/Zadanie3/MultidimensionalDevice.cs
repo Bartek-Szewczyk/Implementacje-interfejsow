@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Zadanie3
 {
-    class MultidimensionalDevice:BaseDevice
+    public class MultidimensionalDevice:BaseDevice
     {
         public static MultidimensionalDevice CreateInstance()
         {
@@ -61,6 +61,19 @@ namespace Zadanie3
         {
             Scan(out IDocument doc1);
             Print(in doc1);
+
+        }
+        public void FaxSend(in IDocument doc1)
+        {
+            if (state == IDevice.State.@on)
+            {
+                var fax = Fax.CreateInstance();
+                fax.PowerOn();
+                fax.FaxSend(doc1);
+                fax.PowerOff();
+                fax.Counter = FaxCounter;
+                FaxCounter++;
+            }
 
         }
     }
