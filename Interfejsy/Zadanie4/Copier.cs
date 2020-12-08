@@ -6,7 +6,6 @@ namespace Zadanie4
 {
     public class Copier : IPrinter, IScanner
     {
-
         public static Copier CreateInstance()
         {
             return new Copier();
@@ -19,12 +18,19 @@ namespace Zadanie4
         private IPrinter _printer;
         private IScanner _scanner;
         private IDevice.State _printerState = IDevice.State.off;
+
         private IDevice.State _scannerState = IDevice.State.off;
+
+        public Copier()
+        {
+            _printer = this;
+            _scanner = this;
+        }
 
         void IPrinter.SetState(IDevice.State state)
         {
             _printerState = state;
-            
+
         }
         void IScanner.SetState(IDevice.State state)
         {
@@ -36,7 +42,7 @@ namespace Zadanie4
             {
                 return IDevice.State.on;
             }
-            else if(_scannerState == IDevice.State.standby && _printerState == IDevice.State.standby)
+            else if (_scannerState == IDevice.State.standby && _printerState == IDevice.State.standby)
             {
                 return IDevice.State.standby;
             }
@@ -48,7 +54,7 @@ namespace Zadanie4
 
         void IDevice.SetState(IDevice.State state)
         {
-           _printer.SetState(state);
+            _printer.SetState(state);
             _scanner.SetState(state);
         }
 
@@ -58,7 +64,7 @@ namespace Zadanie4
             {
                 _printer.StandbyOn();
                 _scanner.StandbyOn();
-                
+
             }
         }
         public void TurnOff()
@@ -85,17 +91,18 @@ namespace Zadanie4
 
         public void Print(in IDocument doc1)
         {
-            if (GetState() == IDevice.State.@on)
+            if (GetState() == IDevice.State.@on || GetState() == IDevice.State.standby)
             {
                 Console.WriteLine(DateTime.Now + " Print: " + doc1.GetFileName());
                 PrintCounter++;
+                _printerState = IDevice.State.standby;
             }
 
         }
         public void Scan(out IDocument doc1, IDocument.FormatType formatType)
         {
             doc1 = null;
-            if (GetState() == IDevice.State.@on)
+            if (GetState() == IDevice.State.@on || GetState() == IDevice.State.standby)
             {
                 switch (formatType)
                 {
@@ -113,6 +120,7 @@ namespace Zadanie4
 
                 Console.WriteLine(DateTime.Now + " Scan: " + doc1.GetFileName());
                 ScanCounter++;
+                _scannerState = IDevice.State.standby;
             }
 
 

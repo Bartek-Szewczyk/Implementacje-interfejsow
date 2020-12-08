@@ -16,7 +16,7 @@ namespace Zadanie1
 
             IDocument doc2;
             xerox.Scan(out doc2);
-            //xerox.ScanAndPrint();
+            xerox.ScanAndPrint();
             Console.WriteLine(xerox.Counter);
             Console.WriteLine(xerox.PrintCounter);
             Console.WriteLine(xerox.ScanCounter);

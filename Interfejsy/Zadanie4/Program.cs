@@ -9,7 +9,7 @@ namespace Zadanie4
         static void Main(string[] args)
         {
             var xerox = Copier.CreateInstance();
-            xerox.PowerOn();
+            xerox.TurnOn();
 
             IDocument doc1 = new PDFDocument("aaa.pdf");
             xerox.Print(in doc1);
